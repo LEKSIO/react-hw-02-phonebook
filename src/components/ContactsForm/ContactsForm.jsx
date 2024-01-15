@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import css from './ContactsForm.module.css';
 
 export class ContactsForm extends Component {
   handleSubmit = e => {
@@ -12,7 +11,7 @@ export class ContactsForm extends Component {
 
   render() {
     return (
-      <form className={css['contacts-form']} onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <label htmlFor="contact-name">Name</label>
         <input
           type="text"
