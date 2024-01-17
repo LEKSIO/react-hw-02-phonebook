@@ -1,6 +1,9 @@
 import { nanoid } from 'nanoid';
 import { Component } from 'react';
+
 import { ContactsForm } from './ContactsForm/ContactsForm';
+import { SectionWrapper } from './SectionWrapper/SectionWrapper';
+import { ContactsList } from './ContactsList/ContactsList';
 
 export class App extends Component {
   state = {
@@ -24,11 +27,25 @@ export class App extends Component {
     }));
   };
 
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(obj => obj.id !== contactId),
+    }));
+  };
+
   render() {
+    const filteredContacts = this.state.contacts.filter(obj =>
+      obj.name.toLowerCase().includes(this.state.filter.trim().toLowerCase())
+    ); // (Note: any string includes an empty string)
     return (
-      <>
-        <ContactsForm addContact={this.addContact} /> react-hw-02-phonebook
-      </>
+      <SectionWrapper title="Phonebook">
+        <ContactsForm addContact={this.addContact} />
+        <h2>Contacts</h2>
+        <ContactsList
+          contacts={filteredContacts}
+          deleteContact={this.deleteContact}
+        />
+      </SectionWrapper>
     );
   }
 }

@@ -12,7 +12,7 @@ export class ContactsForm extends Component {
 
   render() {
     return (
-      <form className={css['constacts-form']} onSubmit={this.handleSubmit}>
+      <form className={css['contacts-form']} onSubmit={this.handleSubmit}>
         <label htmlFor="contact-name">Name</label>
         <input
           type="text"
