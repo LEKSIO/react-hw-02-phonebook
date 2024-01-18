@@ -4,6 +4,7 @@ import { Component } from 'react';
 import { ContactsForm } from './ContactsForm/ContactsForm';
 import { SectionWrapper } from './SectionWrapper/SectionWrapper';
 import { ContactsList } from './ContactsList/ContactsList';
+import { ContactsListFilter } from './ContactsListFilter/ContactsListFilter';
 
 export class App extends Component {
   state = {
@@ -33,6 +34,10 @@ export class App extends Component {
     }));
   };
 
+  changeFilter = e => {
+    this.setState(() => ({ filter: e.target.value }));
+  };
+
   render() {
     const filteredContacts = this.state.contacts.filter(obj =>
       obj.name.toLowerCase().includes(this.state.filter.trim().toLowerCase())
@@ -41,6 +46,10 @@ export class App extends Component {
       <SectionWrapper title="Phonebook">
         <ContactsForm addContact={this.addContact} />
         <h2>Contacts</h2>
+        <ContactsListFilter
+          filter={this.state.filter}
+          changeFilter={this.changeFilter}
+        />
         <ContactsList
           contacts={filteredContacts}
           deleteContact={this.deleteContact}
